@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Loading from './components/loading/Loading';
-import Table from './components/Table/index';
+import Loading from '../Loading/Loading';
+import Table from '../../components/Table/index';
+import { Button, Search, Sort } from '../../components/Button/index';
 import { Container, Row, Col, FormGroup }from 'react-bootstrap';
 import { DEFAULT_HPP, DEFAULT_PAGE, DEFAULT_QUERY, PATH_BASE,
-         PATH_SEARCH, PARAM_HPP, PARAM_PAGE, PARAM_SEARCH } from './constants/index';
+         PATH_SEARCH, PARAM_HPP, PARAM_PAGE, PARAM_SEARCH } from '../../constants/index';
 import PropTypes from 'prop-types';
 import { sortBy, update } from 'lodash';
 
@@ -27,7 +28,7 @@ const updateTopStories = (hits, page) => (prevState) => {
     isLoading: false
   }
 };
-class App extends Component {
+class Php extends Component {
    // setting up internal component state
   // ES6 class can use constructor to initialize internal state
   constructor(props){
@@ -38,7 +39,7 @@ class App extends Component {
     this.state = {
       results: null,
       searchKey: '',
-      searchTerm: DEFAULT_QUERY,
+      searchTerm: 'PHP',
       isLoading: false,
     }
 
@@ -187,87 +188,6 @@ class App extends Component {
   }
 }
 
-
-class Search extends Component {
-
-  componentDidMount() {
-    this.input.focus();
-  }
-
-  render() {
-
-    const { onChange, value, children, onSubmit } = this.props;
-
-    return(
-      <form onSubmit= {onSubmit}>
-      <FormGroup>
-
-        <h1 style={{ fontWeight: 'bold' }}>{ children }</h1> 
-        <hr style={{ border: '2px solid black', width: '100%' }} />
-
-        <div className="input-group">
-
-        <input
-          className="form-control width100 searchForm" 
-          type="text" 
-          value={value}
-          onChange={onChange}
-          ref={(node) => {this.input = node}}
-        />
-
-        <span className="input-group-btn">
-          <button
-            className="btn btn-primary searchBtn"
-            type="submit"
-          >
-            Search
-          </button>
-        </span>
-
-        </div>
-
-        </FormGroup>
-      </form>
-    )
-  }
-
-}
-
-const Button = ({ onClick, children, className='' }) => 
-  <button
-    className={ className }  
-    onClick={ onClick } >
-    { children }
-  </button>
-
-Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired
-}
-
-Button.defaultProps = {
-  className: '',
-}
-
 const ButtonWithLoading = withLoading(Button);
 
-const Sort = ({ sortKey, onSort, children, className, activeSortKey }) => 
-  {
-    const sortClass = ['btn btn-default sortBtn'];
-    if (sortKey === activeSortKey) {
-      sortClass.push('btn btn-primary');
-    }
-
-    return (
-      <Button 
-        className={ sortClass.join(' ') }
-        onClick={ () => onSort(sortKey)}
-      >
-        {children}
-      </Button>
-    )
-  }
-
-
-export default App;
+export default Php;
