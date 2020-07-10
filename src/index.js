@@ -9,7 +9,7 @@ import Python from './components/Python';
 import Php from './components/PHP';
 
 const Root = () => 
-  <Router>
+  <Router basename="/newsapp/">
     <div>
       <Navbar>
           <Nav>
